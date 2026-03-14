@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>B-Tree | Autumn</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/tags/b-tree/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a29c24210eb31d9ce56f669c66a35c9c51b17376b7764e336a49af7dec914cf0.css" integrity="sha256-opwkIQ6zHZzlb2acZqNcnFGxc3a3dk4zakmvfeyRTPA=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/tags/b-tree/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/tags/b-tree/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body class="list" id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Autumn (Alt + H)">Autumn</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header">
+  <h1>
+    B-Tree
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/posts/lsm-tree%E5%92%8Cb-tree/title.jpg" alt="LSM-tree">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">LSM-tree和B-tree的学习总结
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>前言 LSM-tree和B-tree作为两种不同的数据存储索引结构，在不同的情况下有着各自的优势。在上学期浅薄学习了数据库相关知识后，我打算进阶一下，不止局限于SQL语法的增删改查，更多地面向底层逻辑的知识拓展。本文简单地讲解了关于LSM-tree和B-tree的知识，也算我个人的一个学习总结。之后也许大概可能会有一篇实操性的文章吧，不确定。 WARNING！ 由于笔者的文学功底和能力水平极其平庸，本文可能会不可避免地出现:
+对错参杂地理解 外星人地语言表达 无意义的加粗加黑 请谅解
+Refence 在学习过程，参考了以下书籍和网站
+《Designing Data-Intensive Applications》中文译版
+数据结构 C语言第三版 人民邮电出版社
+rocksDB文档
+levelDB文档
+初级的驱动数据库的数据结构 世界上最简单的数据库 它非常简单，就是一个文本文件，然后每一行包含用户所输入的键值对，键值对之间会用逗号隔开。它只需要两串bash命令就可以实现。
+#!/bin/bash db_set () { echo &#34;$1,$2&#34; &gt;&gt; database } db_get () { grep &#34;^$1,&#34; database | sed -e &#34;s/^$1,//&#34; | tail -n 1 } 每次添加或者是更改数据，都只是在文件的末尾新添一条记录，也就是说如果你是进行的更改操作，旧的值是不会被删除的。这样的模式类似于日志（log），一个仅追加的文件。
+日志 引用《Designing Data-Intensive Applications》来解释日志（log）。 “这个词通常指应用日志：即应用程序输出的描述正在发生的事情的文本。”
+本文在更普遍的意义下使用日志这一词：一个仅追加的记录序列。它可能压根就不是给人类看的，它可以使用二进制格式，并仅能由其他程序读取。
+虽然这样数据库在写入时十分高效，但是我们可以很容易发现这个数据库有显然的不足之处：
+每次查找都会从头查找，如果存储的数据量过大会造成查找时间过长。 它的数据量也许大概可以“无限”增加，造成硬盘空间没了。 这时我们便引用一个数据结构来高效地查找数据库中特定键的值：索引（index）。
+索引 index的大致思想是通过保存一些额外的数据来作为一个指引路标来帮助用户来找到想要的数据. 本质是一个从主数据衍生的额外的数据，它能够有效的缩短查询所需要的时间，但是它可能会导致写入时的性能很难超过简单的追加写入文件。这是一个值得程序员们进行权衡的地方。
+键值数据的索引 接下来介绍一种常见的索引：键值数据的索引。
+但是首先我们要插播一个知识点：散列映射（hash map） 和 散列表（hash table）
+哈希表/散列表：一个有限连续的地址空间，用以存储按散列函数/散列映射计算得到相应散列地址的数据记录。————《数据结构》第三版
+...</p>
+  </div>
+  <footer class="entry-footer"><span>1 min</span></footer>
+  <a class="entry-link" aria-label="post link to LSM-tree和B-tree的学习总结" href="http://localhost:1313/posts/lsm-tree%E5%92%8Cb-tree/"></a>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">Autumn</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
