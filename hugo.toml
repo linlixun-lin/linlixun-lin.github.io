@@ -2,12 +2,17 @@ baseURL = "https://linlixun-lin.github.io/"
 languageCode = "zh-cn"
 title = "Autumn"
 theme = "PaperMod"
-
+[outputs]
+	home = ["HTML" , "RSS" , "JSON"]
 [params]
     defaultTheme = "auto" # 自动切换夜间模式
     showReadingTime = true
     displayFullContent = false
     ShowPostNavLinks = true
+	ShowSearchButton = true
+	ShowToc = true
+	TopOpen = true
+	mainSections = ["posts"]
 	[params.profileMode]
     enabled = true # 开启个人模式
     title = "Autumn" # 首页大标题
@@ -19,5 +24,22 @@ theme = "PaperMod"
 	[[params.profileMode.buttons]]
         name = "开始阅读"
         url = "posts"
-
-    
+	[[params.socialIcons]]
+        name = "github"
+        url = "https://github.com/linlixun-lin"
+    [[params.socialIcons]]
+        name = "bilibili"
+        url = "https://space.bilibili.com/471403876"
+    [[params.socialIcons]]
+        name = "email"
+        url = "mailto:3180606143@qq.com"
+    [[menu.main]]
+    name = "搜索"
+    url = "search"
+    weight = 1
+	[[menu.main]]
+    name = "关于"
+    url = "about"
+    weight = 2
+	[markup.goldmark.renderer]
+    unsafe = true # 允许 HTML 标签

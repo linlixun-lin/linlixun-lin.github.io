@@ -102,6 +102,16 @@
             </div>
         </div>
         <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/search" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about" title="关于">
+                    <span>关于</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -130,7 +140,24 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    
+    var poemWrapper = document.createElement('div');
+    poemWrapper.id = 'poem-footer-dynamic';
+    
+    poemWrapper.style = "font-size: 1.5em; color: #888; margin-bottom: 10px; font-family: 'STKaiti', 'KaiTi', serif;";
+    poemWrapper.innerHTML = result.data.content + " —— 「" + result.data.origin.author + " · " + result.data.origin.title + "」";
+    
+    
+    var footer = document.querySelector('.footer');
+    if (footer) {
+      
+      footer.insertBefore(poemWrapper, footer.firstChild);
+    }
+  });
+</script>
 
 <script>
     let menu = document.getElementById('menu');

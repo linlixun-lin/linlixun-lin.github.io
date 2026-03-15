@@ -1,0 +1,18 @@
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    // 1. 创建诗词元素
+    var poemWrapper = document.createElement('div');
+    poemWrapper.id = 'poem-footer-dynamic';
+    // 设置样式：灰色、小字、居中、距离版权文字有一点间距
+    poemWrapper.style = "font-size: 1.5em; color: #888; margin-bottom: 10px; font-family: 'STKaiti', 'KaiTi', serif;";
+    poemWrapper.innerHTML = result.data.content + " —— 「" + result.data.origin.author + " · " + result.data.origin.title + "」";
+    
+    // 2. 找到页脚容器 (PaperMod 的页脚类名是 .footer)
+    var footer = document.querySelector('.footer');
+    if (footer) {
+      // 3. 将诗词插入到页脚的最前面（也就是版权信息上方）
+      footer.insertBefore(poemWrapper, footer.firstChild);
+    }
+  });
+</script>

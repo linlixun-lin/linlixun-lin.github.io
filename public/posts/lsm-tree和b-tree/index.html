@@ -101,6 +101,16 @@
             </div>
         </div>
         <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/search" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about" title="关于">
+                    <span>关于</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -122,7 +132,57 @@
 <figure class="entry-cover">
             <img loading="eager" src="http://localhost:1313/posts/lsm-tree%E5%92%8Cb-tree/title.jpg" alt="LSM-tree">
         
-</figure>
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%89%8d%e8%a8%80" aria-label="前言">前言</a></li>
+                <li>
+                    <a href="#refence" aria-label="Refence">Refence</a></li>
+                <li>
+                    <a href="#%e5%88%9d%e7%ba%a7%e7%9a%84%e9%a9%b1%e5%8a%a8%e6%95%b0%e6%8d%ae%e5%ba%93%e7%9a%84%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" aria-label="初级的驱动数据库的数据结构">初级的驱动数据库的数据结构</a><ul>
+                        
+                <li>
+                    <a href="#%e4%b8%96%e7%95%8c%e4%b8%8a%e6%9c%80%e7%ae%80%e5%8d%95%e7%9a%84%e6%95%b0%e6%8d%ae%e5%ba%93" aria-label="世界上最简单的数据库">世界上最简单的数据库</a></li>
+                <li>
+                    <a href="#%e6%97%a5%e5%bf%97" aria-label="日志">日志</a></li>
+                <li>
+                    <a href="#%e7%b4%a2%e5%bc%95" aria-label="索引">索引</a></li>
+                <li>
+                    <a href="#%e9%94%ae%e5%80%bc%e6%95%b0%e6%8d%ae%e7%9a%84%e7%b4%a2%e5%bc%95" aria-label="键值数据的索引">键值数据的索引</a></li>
+                <li>
+                    <a href="#%e7%ae%80%e5%8d%95%e7%9a%84%e4%bc%98%e5%8c%96" aria-label="简单的优化">简单的优化</a></li></ul>
+                </li>
+                <li>
+                    <a href="#sstables%e5%92%8clsm-tree" aria-label="SSTables和LSM-tree">SSTables和LSM-tree</a><ul>
+                        
+                <li>
+                    <a href="#sstbales" aria-label="SSTbales">SSTbales</a></li>
+                <li>
+                    <a href="#%e6%9e%84%e5%bb%ba%e5%92%8c%e7%bb%b4%e6%8a%a4sstables" aria-label="构建和维护SSTables">构建和维护SSTables</a></li>
+                <li>
+                    <a href="#lsm-tree" aria-label="LSM-tree">LSM-tree</a></li></ul>
+                </li>
+                <li>
+                    <a href="#b-tree" aria-label="B-tree">B-tree</a><ul>
+                        
+                <li>
+                    <a href="#%e9%97%ae%e9%a2%98%e4%bc%98%e5%8c%96" aria-label="问题优化">问题优化</a></li></ul>
+                </li>
+                <li>
+                    <a href="#lsm-tree%e5%92%8cb-tree%e7%9a%84%e6%af%94%e8%be%83" aria-label="LSM-tree和B-tree的比较">LSM-tree和B-tree的比较</a></li>
+                <li>
+                    <a href="#%e5%b0%be%e8%ae%b0" aria-label="尾记">尾记</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
   <div class="post-content"><h2 id="前言">前言<a hidden class="anchor" aria-hidden="true" href="#前言">#</a></h2>
 <p>LSM-tree和B-tree作为两种不同的数据存储索引结构，在不同的情况下有着各自的优势。在上学期浅薄学习了数据库相关知识后，我打算进阶一下，不止局限于SQL语法的增删改查，更多地面向底层逻辑的知识拓展。本文简单地讲解了关于LSM-tree和B-tree的知识，也算我个人的一个学习总结。之后也许大概可能会有一篇实操性的文章吧，不确定。
 WARNING！
@@ -153,7 +213,7 @@ WARNING！
 </span></span></code></pre></div><p>每次添加或者是更改数据，都只是在文件的末尾新添一条记录，也就是说如果你是进行的更改操作，旧的值是不会被删除的。这样的模式类似于日志（log），一个仅追加的文件。</p>
 <h3 id="日志">日志<a hidden class="anchor" aria-hidden="true" href="#日志">#</a></h3>
 <p>引用《Designing Data-Intensive Applications》来解释<strong>日志</strong>（log）。 “这个词通常指应用日志：即应用程序输出的描述正在发生的事情的文本。”</p>
-<p><!-- raw HTML omitted -->本文在更普遍的意义下使用日志这一词：一个仅追加的记录序列。它可能压根就不是给人类看的，它可以使用二进制格式，并仅能由其他程序读取。<!-- raw HTML omitted --></p>
+<p><small>本文在更普遍的意义下使用日志这一词：一个仅追加的记录序列。它可能压根就不是给人类看的，它可以使用二进制格式，并仅能由其他程序读取。</small></p>
 <p>虽然这样数据库在写入时十分高效，但是我们可以很容易发现这个数据库有显然的<strong>不足之处</strong>：</p>
 <ol>
 <li>每次查找都会从头查找，如果存储的数据量过大会造成查找时间过长。</li>
@@ -168,7 +228,7 @@ WARNING！
 <p>但是首先我们要插播一个知识点：<strong>散列映射（hash map）</strong> 和 <strong>散列表（hash table）</strong></p>
 <p><strong>哈希表/散列表</strong>：一个有限连续的地址空间，用以存储按<strong>散列函数/散列映射</strong>计算得到相应散列地址的数据记录。————《数据结构》第三版</p>
 <p>我的理解是它通过一个映射函数，也就是散列函数配合码值得到了一个存储地址。这个存储地址就是哈希表数组的下标比如存入 Key = &ldquo;Apple&rdquo;，Value = &ldquo;Red&rdquo;。我假设通过某个散列函数得到了一个结果3.然后我就将&quot;Red&quot;这个value存储到数组的3号位置。
-<!-- raw HTML omitted -->tip：有时会出现冲突情况，这里不做详细解释。<!-- raw HTML omitted -->
+<small>tip：有时会出现冲突情况，这里不做详细解释。</small>
 对于查找数据，既是重新进行一遍运算，直接定位，便可以做到不遍历全部数据。</p>
 <p>键值存储与在大多数编程语言中可以找到的 <strong>字典（dictionary）</strong> 类型非常相似，通常字典都是用 散列映射（hash map） 或 散列表（hash table） 实现的。</p>
 <p>既然可以用散列映射来表示内存中的数据结构，那我们也可以尝试用它来<strong>索引硬盘上的数据</strong>:假设我们的数据存储仅仅只是一个追加写入的文件，那最简单的策略就是：得到一个散列映射（散列函数），每一个键都能得到对应的存储地址<del>一般情况下能</del>。然后将指向<strong>值的偏移量</strong>！！！存储进去，不是值。当我们想要更新或者新增时，也只是重复以上步骤。它仍然没有做到删除旧的数据，但是它极大地提升了大数据量时的查询速率。</p>
@@ -283,7 +343,24 @@ LSM-tree通常能够比 B-tree支持更高的写入吞吐量，部分原因是�
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    
+    var poemWrapper = document.createElement('div');
+    poemWrapper.id = 'poem-footer-dynamic';
+    
+    poemWrapper.style = "font-size: 1.5em; color: #888; margin-bottom: 10px; font-family: 'STKaiti', 'KaiTi', serif;";
+    poemWrapper.innerHTML = result.data.content + " —— 「" + result.data.origin.author + " · " + result.data.origin.title + "」";
+    
+    
+    var footer = document.querySelector('.footer');
+    if (footer) {
+      
+      footer.insertBefore(poemWrapper, footer.firstChild);
+    }
+  });
+</script>
 
 <script>
     let menu = document.getElementById('menu');

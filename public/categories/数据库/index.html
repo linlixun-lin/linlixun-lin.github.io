@@ -102,6 +102,16 @@
             </div>
         </div>
         <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/search" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about" title="关于">
+                    <span>关于</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -138,6 +148,7 @@ levelDB文档
 键值数据的索引 接下来介绍一种常见的索引：键值数据的索引。
 但是首先我们要插播一个知识点：散列映射（hash map） 和 散列表（hash table）
 哈希表/散列表：一个有限连续的地址空间，用以存储按散列函数/散列映射计算得到相应散列地址的数据记录。————《数据结构》第三版
+我的理解是它通过一个映射函数，也就是散列函数配合码值得到了一个存储地址。这个存储地址就是哈希表数组的下标比如存入 Key = “Apple”，Value = “Red”。我假设通过某个散列函数得到了一个结果3.然后我就将&#34;Red&#34;这个value存储到数组的3号位置。 tip：有时会出现冲突情况，这里不做详细解释。 对于查找数据，既是重新进行一遍运算，直接定位，便可以做到不遍历全部数据。
 ...</p>
   </div>
   <footer class="entry-footer"><span>1 min</span></footer>
@@ -158,7 +169,24 @@ levelDB文档
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    
+    var poemWrapper = document.createElement('div');
+    poemWrapper.id = 'poem-footer-dynamic';
+    
+    poemWrapper.style = "font-size: 1.5em; color: #888; margin-bottom: 10px; font-family: 'STKaiti', 'KaiTi', serif;";
+    poemWrapper.innerHTML = result.data.content + " —— 「" + result.data.origin.author + " · " + result.data.origin.title + "」";
+    
+    
+    var footer = document.querySelector('.footer');
+    if (footer) {
+      
+      footer.insertBefore(poemWrapper, footer.firstChild);
+    }
+  });
+</script>
 
 <script>
     let menu = document.getElementById('menu');
