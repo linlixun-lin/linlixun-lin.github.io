@@ -2,6 +2,7 @@ baseURL = "https://linlixun-lin.github.io/"
 languageCode = "zh-cn"
 title = "Autumn"
 theme = "PaperMod"
+hasCJKLanguage = true
 [outputs]
 	home = ["HTML" , "RSS" , "JSON"]
 [params]
