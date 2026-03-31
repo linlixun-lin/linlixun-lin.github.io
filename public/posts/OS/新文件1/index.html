@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Tags | Autumn</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
+<title>OS学习总结 | Autumn</title>
+<meta name="keywords" content="考研, OS">
+<meta name="description" content="如有错误请指出">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/tags/">
+<link rel="canonical" href="http://localhost:1313/posts/os/%E6%96%B0%E6%96%87%E4%BB%B61/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.a29c24210eb31d9ce56f669c66a35c9c51b17376b7764e336a49af7dec914cf0.css" integrity="sha256-opwkIQ6zHZzlb2acZqNcnFGxc3a3dk4zakmvfeyRTPA=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
@@ -18,8 +18,7 @@
 <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/tags/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/tags/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/os/%E6%96%B0%E6%96%87%E4%BB%B61/">
 <noscript>
     <style>
         #theme-toggle,
@@ -73,7 +72,7 @@
 
 </script>
 </head>
-<body class="list" id="top">
+<body id="top">
     <header class="header">
     <nav class="nav">
         <div class="logo">
@@ -116,24 +115,134 @@
     </nav>
 </header>
 <main class="main">
-<header class="page-header">
-    <h1>Tags</h1>
-</header>
 
-<ul class="terms-tags">
-    <li>
-        <a href="http://localhost:1313/tags/b-tree/">B-tree <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://localhost:1313/tags/lsm/">LSM <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://localhost:1313/tags/os/">OS <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://localhost:1313/tags/%E8%80%83%E7%A0%94/">考研 <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-</ul>
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      OS学习总结
+    </h1>
+    <div class="post-description">
+      如有错误请指出
+    </div>
+    <div class="post-meta"><span>3 min</span>
+
+</div>
+  </header> 
+<figure class="entry-cover">
+        <img loading="eager" src="http://localhost:1313/posts/OS/title.jpg" alt="OS">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%89%8d%e8%a8%80" aria-label="前言">前言</a></li>
+                <li>
+                    <a href="#%e4%b8%80%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%b3%bb%e7%bb%9f%e6%a6%82%e8%bf%b0" aria-label="一.计算机系统概述">一.计算机系统概述</a><ul>
+                        
+                <li>
+                    <a href="#%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e7%9a%84%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5" aria-label="操作系统的基本概念">操作系统的基本概念</a></li>
+                <li>
+                    <a href="#%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e7%9a%84%e5%8a%9f%e8%83%bd%e5%92%8c%e7%9b%ae%e6%a0%87" aria-label="操作系统的功能和目标">操作系统的功能和目标</a></li>
+                <li>
+                    <a href="#%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e7%9a%84%e7%89%b9%e5%be%81" aria-label="操作系统的特征">操作系统的特征</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="前言">前言<a hidden class="anchor" aria-hidden="true" href="#前言">#</a></h2>
+<p>一开始还没打算做这个博客，这个学习资料原来准备在平板上自己手写的，但是后面觉得在平板上又重新手写一便写过的知识点很累且很蠢，所以我打算整成一篇博客，正好壮大一下我的博客。</p>
+<p>文章中所有知识点均来自本人在听了王道考研课程，看了《计算机操作系统》第四版 后的理解和原文。</p>
+<p>这个我估计会一周一更吧，打算边学边写的。</p>
+<h2 id="一计算机系统概述">一.计算机系统概述<a hidden class="anchor" aria-hidden="true" href="#一计算机系统概述">#</a></h2>
+<p>首先了解一下计算机系统的层次结构<br>
+最底层：裸机（仅包含CPU，内存等硬件的设备）<br>
+之后：操作系统（比如windows，mac等）
+再接着：应用程序和用户。
+一般而言，是应用程序与操作系统紧密贴合，但是特殊情况下，比如用户接口，用户也可以直接和操作系统联系。</p>
+<h3 id="操作系统的基本概念">操作系统的基本概念<a hidden class="anchor" aria-hidden="true" href="#操作系统的基本概念">#</a></h3>
+<p>阐述操作系统的概念：<br>
+控制和管理整个计算机系统的硬件与软件资源，合理地组织，调度计算机的工作与资源的分配，进而为用户和其他软件提供方便接口与环境的程序集合。操作系统是计算机系统中<strong>最基本</strong>的<br>
+总结三点要点：</p>
+<ol>
+<li>系统资源的管理者</li>
+<li>向上层提供方便易用的服务</li>
+<li>最接近硬件的一层软件</li>
+</ol>
+<h3 id="操作系统的功能和目标">操作系统的功能和目标<a hidden class="anchor" aria-hidden="true" href="#操作系统的功能和目标">#</a></h3>
+<p>一. 系统资源的管理者</p>
+<ol>
+<li>处理机管理</li>
+<li>存储器管理</li>
+<li>文件管理</li>
+<li>设备管理</li>
+</ol>
+<p>之后的篇章会详细学习，这里只列名字了</p>
+<p>二. 向上层提供方便易用的服务<br>
+硬件只能听懂二进制的指令，但是操作系统提供了更加方便的交互接口</p>
+<ol>
+<li>命令接口<br>
+命令接口分为两类：联机命令接口（交互式命令接口），我的理解是及时反馈，即用户输入一条命令，设备就能完成指定的功能，这也强调了交互性。
+脱机命令接口（批处理命令接口），我的理解是批量反馈，就类似于写程序代码，将整体全部写完后再运行，用户将一大堆指令汇集在一起提交，然后设备集中处理实现。</li>
+<li>程序接口<br>
+程序接口由一组系统调用（也称作广义指令）组成。用户通过在程序中使用这些系统调用来请求操作系统提供服务。普通用户不能直接地使用程序接口，只能通过程序代码来间接使用。</li>
+</ol>
+<p>命令接口和程序接口合在一起统称为<strong>用户接口</strong>。</p>
+<p>三. 对计算机资源的扩充<br>
+对硬件机器的拓展，让各类硬件相互配合协调。</p>
+<h3 id="操作系统的特征">操作系统的特征<a hidden class="anchor" aria-hidden="true" href="#操作系统的特征">#</a></h3>
+<p>操作系统的基本特征包括以下四个：并发，共享，虚拟，异步
+其中并发和共享是最基本的两个特征，二者互为存在条件。</p>
+<ol>
+<li>
+<p>并发<br>
+指<strong>两个或者多个事件在同一时间间隔内发生</strong>，宏观上看它们是同时发生的，比如我一天内干了很多事情，一天这个概念我们暂且看作宏观，微观上看它们其实是隔开发生的，比如细化到一天的每个小时，我做的事情都是在不同时间段完成的。</p>
+<p>注意和并行区别开来，并行就是在同一时间内同时进行两件或者多个事情。</p>
+<p>一个重要考点：单核CPU在同一时刻只能执行一个程序，各个程序能够并发执行。多核CPU能够在同一时刻实现并行。</p>
+</li>
+<li>
+<p>共享<br>
+共享即资源共享，指系统中的资源可供内存中多个并发执行的进程<strong>共同使用</strong>。<br>
+共享可分为两类：互斥共享方式和同时访问方式。</p>
+<p>互斥共享方式：简单来说，一段时间内只允许一个进程访问该资源，比如打印机的使用，假如有两个人想同时使用同一个打印机，那就无法做到，只能两个人分时间段来进行打印。</p>
+<p>同时访问方式：和互斥共享方式相反，该方式允许一个时间段内资源可被多个进程同时访问，比如磁盘设备。</p>
+</li>
+<li>
+<p>虚拟<br>
+这个东西很难理解，是指将一个物理上的实体变为若干逻辑上的对应物，就比如通过时分复用技术，让多道程序并发执行，来分时使用一个处理器从而达到“多个处理器”的效果。还有空分复用技术等。</p>
+</li>
+<li>
+<p>异步
+由于资源有限，进程的进行总是走走停停的，比如当一个进程进行时，突然有一个更高优先级的进程插队，或者当前进程的时间片到了，导致这个进程不得不停止下来。这种情况导致进程以“不可预知的速度向前推进”，这就是异步。</p>
+</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/%E8%80%83%E7%A0%94/">考研</a></li>
+      <li><a href="http://localhost:1313/tags/os/">OS</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/lsm-tree%E5%92%8Cb-tree/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>LSM-tree和B-tree的学习总结</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
     </main>
     
 <footer class="footer">

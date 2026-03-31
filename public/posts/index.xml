@@ -14,5 +14,12 @@
       <guid>http://localhost:1313/posts/lsm-tree%E5%92%8Cb-tree/</guid>
       <description>如有错误请指出</description>
     </item>
+    <item>
+      <title>OS学习总结</title>
+      <link>http://localhost:1313/posts/os/%E6%96%B0%E6%96%87%E4%BB%B61/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/os/%E6%96%B0%E6%96%87%E4%BB%B61/</guid>
+      <description>如有错误请指出</description>
+    </item>
   </channel>
 </rss>
